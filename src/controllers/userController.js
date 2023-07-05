@@ -30,7 +30,14 @@ exports.getUser = async (req, res) => {
 exports.addUser = async (req, res) => {
   try {
     // initially simple user and password as it is (not hashing for now)
-    const user = await User.create({
+    // first find user in db by the email, if exits then return
+    let user = await User.findOne({ where: { email: req.body.email } });
+
+    if (user) {
+      return res.status(409).json({ message: "User Already Exists" });
+    }
+
+    user = await User.create({
       name: req.body.name,
       email: req.body.email,
       password: req.body.password,
