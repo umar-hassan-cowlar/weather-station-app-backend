@@ -2,8 +2,10 @@
 const express = require("express");
 require("dotenv").config();
 
-// importing configs
+// importing configs & middlewares
 const sequelize = require("./config/dbConfig");
+const errorMiddleware = require("./middlewares/errorMiddleware");
+const notFoundMiddleware = require("./middlewares/routeMiddleware");
 
 // importing routes
 const userRoutes = require("./routes/userRoute");
@@ -22,6 +24,10 @@ app.use("/weather", weatherRoutes);
 app.get("/", (req, res) => {
   res.json({ message: "OK??" });
 });
+
+// using middlewares
+app.use(notFoundMiddleware);
+app.use(errorMiddleware);
 
 sequelize
   .sync()
