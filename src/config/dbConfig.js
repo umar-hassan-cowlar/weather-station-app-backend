@@ -10,14 +10,14 @@ const sequelize = new Sequelize(
   }
 )
 
-// testing db connection
-sequelize
-  .authenticate()
-  .then(() => {
-    console.log('Database connection has been established successfully.')
-  })
-  .catch((error) => {
-    console.error('Unable to connect to the database:', error)
-  })
+// // testing db connection
+// sequelize
+//   .authenticate()
+//   .then(() => {
+//     console.log('Database connection has been established successfully.')
+//   })
+//   .catch((error) => {
+//     console.error('Unable to connect to the database:', error)
+//   })
 
 module.exports = sequelize
