@@ -20,11 +20,11 @@ router.get("/all", userController.getAllUsers);
 // get single user
 router.get("/:id", userController.getUser);
 
-// add user
+// signup user
 router.post(
-  "/add",
+  "/signup",
   validationMiddleware(userValidationSchema),
-  userController.addUser
+  userController.signUp
 );
 
 // update user
