@@ -1,5 +1,6 @@
 const express = require('express')
 const weatherAuthorization = require('../middlewares/authorization/weatherAuthorization')
+
 // importing controllers
 const weatherController = require('../controllers/weatherController')
 

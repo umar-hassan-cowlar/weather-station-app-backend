@@ -13,10 +13,6 @@ const {
 // router
 const router = express.Router()
 
-// login user
-
-// signup user
-
 // get all users
 router.get('/all', userController.getAllUsers)
 
