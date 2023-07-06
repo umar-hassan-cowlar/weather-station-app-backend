@@ -1,3 +1,4 @@
+const bcrypt = require("bcrypt");
 const User = require("../models/userModel");
 
 // find all
@@ -28,21 +29,22 @@ exports.getUser = async (req, res) => {
 };
 
 // add a new user
-exports.addUser = async (req, res) => {
+exports.signUp = async (req, res) => {
   try {
-    // initially simple user and password as it is (not hashing for now)
-    // first find user in db by the email, if exits then return
-    let user = await User.findOne({ where: { email: req.body.email } });
+    const { name, email, password } = req.body;
+
+    let user = await User.findOne({ where: { email } });
 
     if (user) {
       return res.status(409).json({ message: "User Already Exists" });
     }
 
-    const { name, email, password } = req.body;
+    let hashedPassword = await bcrypt.hash(password, 10);
+
     user = await User.create({
       name,
       email,
-      password,
+      password: hashedPassword,
     });
 
     res.status(201).json(user);
