@@ -1,4 +1,5 @@
 const bcrypt = require("bcrypt");
+const JWT = require("jsonwebtoken");
 const User = require("../models/userModel");
 
 // find all
@@ -33,21 +34,37 @@ exports.signUp = async (req, res) => {
   try {
     const { name, email, password } = req.body;
 
+    // checking if user already exist
     let user = await User.findOne({ where: { email } });
-
     if (user) {
       return res.status(409).json({ message: "User Already Exists" });
     }
 
-    let hashedPassword = await bcrypt.hash(password, 10);
+    // encrypting the password
+    const hashedPassword = await bcrypt.hash(password, 10);
 
+    // creating user
     user = await User.create({
       name,
       email,
       password: hashedPassword,
     });
 
-    res.status(201).json(user);
+    const token = await JWT.sign(
+      {
+        id: user.id,
+        name: user.name,
+      },
+      process.env.JWT_SECRET,
+      {
+        expiresIn: "24h",
+      }
+    );
+
+    res.status(201).json({
+      user,
+      token,
+    });
   } catch (err) {
     res.status(500).json({ err: err });
   }
