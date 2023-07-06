@@ -5,7 +5,10 @@ const userController = require("../controllers/userController");
 
 // middleware import
 const validationMiddleware = require("../middlewares/validations/validationMiddleware");
-const userValidationSchema = require("../middlewares/validations/userSchema");
+const {
+  userSignupSchema,
+  userLoginSchema,
+} = require("../middlewares/validations/userSchema");
 
 // router
 const router = express.Router();
@@ -17,13 +20,17 @@ const router = express.Router();
 // get all users
 router.get("/all", userController.getAllUsers);
 
-// get single user
-router.get("/:id", userController.getUser);
+// sign in user
+router.post(
+  "/login",
+  validationMiddleware(userLoginSchema),
+  userController.signIn
+);
 
 // signup user
 router.post(
   "/signup",
-  validationMiddleware(userValidationSchema),
+  validationMiddleware(userSignupSchema),
   userController.signUp
 );
 

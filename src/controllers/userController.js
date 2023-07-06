@@ -13,17 +13,38 @@ exports.getAllUsers = async (req, res) => {
   }
 };
 
-// find one
-exports.getUser = async (req, res) => {
+// sign in user
+exports.signIn = async (req, res) => {
   try {
-    const userId = req.params.id;
-    const users = await User.findByPk(userId);
+    const { email, password } = req.body;
 
-    if (!users) {
+    // checking if the user credentials are valid
+    const user = await User.findOne({ where: { email } });
+    if (!user) {
       return res.status(404).json({ message: "User Not Found" });
     }
 
-    res.status(200).json(users);
+    const validPassword = await bcrypt.compare(password, user.password);
+    if (!validPassword) {
+      return res.status(401).json({ message: "Invalid Credentials" });
+    }
+
+    // if valid generate token
+    const token = await JWT.sign(
+      {
+        id: user.id,
+        name: user.name,
+      },
+      process.env.JWT_SECRET,
+      {
+        expiresIn: "24h",
+      }
+    );
+
+    res.status(201).json({
+      user,
+      token,
+    });
   } catch (err) {
     res.status(500).json({ err: err });
   }
