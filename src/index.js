@@ -1,9 +1,8 @@
 // import statements
 const express = require("express");
 require("dotenv").config();
-
-// importing configs & middlewares
 const sequelize = require("./config/dbConfig");
+const logger = require("./config/logger");
 const errorMiddleware = require("./middlewares/errorMiddleware");
 const notFoundMiddleware = require("./middlewares/routeMiddleware");
 
@@ -33,10 +32,11 @@ sequelize
   .sync()
   .then(() => {
     // listen server log
-    app.listen(process.env.SERVER_PORT || 3000, () => {
-      console.log("Server is running on port 3000");
+    const port = process.env.SERVER_PORT || 3000;
+    app.listen(port || 3000, () => {
+      logger.info(`Server is running on port ${port}`);
     });
   })
   .catch((err) => {
-    console.log(err);
+    logger.error(`Something went wrong ${err}`);
   });

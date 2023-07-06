@@ -1,8 +1,8 @@
 const { Sequelize } = require("sequelize");
 
-const sequelize_config = require("../config/dbConfig");
+const sequelizeConfig = require("../config/dbConfig");
 
-const User = sequelize_config.define("user", {
+const User = sequelizeConfig.define("user", {
   id: {
     type: Sequelize.INTEGER,
     primaryKey: true,

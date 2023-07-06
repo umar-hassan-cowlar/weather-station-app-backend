@@ -1,8 +1,8 @@
 const { Sequelize } = require("sequelize");
 
-const sequelize_config = require("../config/dbConfig");
+const sequelizeConfig = require("../config/dbConfig");
 
-const Weather = sequelize_config.define("weather", {
+const Weather = sequelizeConfig.define("weather", {
   id: {
     type: Sequelize.INTEGER,
     primaryKey: true,

@@ -14,7 +14,8 @@ exports.getAllUsers = async (req, res) => {
 // find one
 exports.getUser = async (req, res) => {
   try {
-    const users = await User.findByPk(req.params.id);
+    const userId = req.params.id;
+    const users = await User.findByPk(userId);
 
     if (!users) {
       return res.status(404).json({ message: "User Not Found" });
@@ -37,10 +38,11 @@ exports.addUser = async (req, res) => {
       return res.status(409).json({ message: "User Already Exists" });
     }
 
+    const { name, email, password } = req.body;
     user = await User.create({
-      name: req.body.name,
-      email: req.body.email,
-      password: req.body.password,
+      name,
+      email,
+      password,
     });
 
     res.status(201).json(user);
@@ -52,7 +54,8 @@ exports.addUser = async (req, res) => {
 // update a user
 exports.updateUser = async (req, res) => {
   try {
-    const user = await User.findByPk(req.params.id);
+    const userId = req.params.id;
+    const user = await User.findByPk(userId);
 
     if (!user) {
       return res.status(404).json({ message: "User Not Found" });
@@ -69,7 +72,8 @@ exports.updateUser = async (req, res) => {
 // delete a user
 exports.deleteUser = async (req, res) => {
   try {
-    const user = await User.findByPk(req.params.id);
+    const userId = req.params.id;
+    const user = await User.findByPk(userId);
 
     if (!user) {
       return res.status(404).json({ message: "User Not Found" });
