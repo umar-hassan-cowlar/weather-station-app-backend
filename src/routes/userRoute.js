@@ -1,43 +1,43 @@
-const express = require("express");
+const express = require('express')
 
 // controller import
-const userController = require("../controllers/userController");
+const userController = require('../controllers/userController')
 
 // middleware import
-const validationMiddleware = require("../middlewares/validations/validationMiddleware");
+const validationMiddleware = require('../middlewares/validations/validationMiddleware')
 const {
   userSignupSchema,
   userLoginSchema,
-} = require("../middlewares/validations/userSchemaMiddleware");
+} = require('../middlewares/validations/userSchemaMiddleware')
 
 // router
-const router = express.Router();
+const router = express.Router()
 
 // login user
 
 // signup user
 
 // get all users
-router.get("/all", userController.getAllUsers);
+router.get('/all', userController.getAllUsers)
 
 // sign in user
 router.post(
-  "/login",
+  '/login',
   validationMiddleware(userLoginSchema),
   userController.signIn
-);
+)
 
 // signup user
 router.post(
-  "/signup",
+  '/signup',
   validationMiddleware(userSignupSchema),
   userController.signUp
-);
+)
 
 // update user
-router.patch("/:id", userController.updateUser);
+router.patch('/:id', userController.updateUser)
 
 // delete user
-router.delete("/:id", userController.deleteUser);
+router.delete('/:id', userController.deleteUser)
 
-module.exports = router;
+module.exports = router

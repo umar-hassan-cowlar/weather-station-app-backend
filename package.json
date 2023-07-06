@@ -20,6 +20,7 @@
     "winston": "^3.9.0"
   },
   "devDependencies": {
+    "eslint": "^8.44.0",
     "nodemon": "^2.0.22"
   }
 }

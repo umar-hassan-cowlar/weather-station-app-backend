@@ -1,17 +1,17 @@
-const express = require("express");
-const weatherAuthorization = require("../middlewares/authorization/weatherAuthorization");
+const express = require('express')
+const weatherAuthorization = require('../middlewares/authorization/weatherAuthorization')
 // importing controllers
-const weatherController = require("../controllers/weatherController");
+const weatherController = require('../controllers/weatherController')
 
-const router = express.Router();
+const router = express.Router()
 
 // get all data
-router.get("/all", weatherAuthorization, weatherController.getAllData);
+router.get('/all', weatherAuthorization, weatherController.getAllData)
 
 // get data within range
-router.get("/ranged", weatherController.getRangedData);
+router.get('/ranged', weatherController.getRangedData)
 
 // add weather data
-router.post("/add", weatherController.addData);
+router.post('/add', weatherController.addData)
 
-module.exports = router;
+module.exports = router

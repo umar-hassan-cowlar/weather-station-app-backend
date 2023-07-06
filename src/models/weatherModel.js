@@ -1,8 +1,8 @@
-const { Sequelize } = require("sequelize");
+const { Sequelize } = require('sequelize')
 
-const sequelizeConfig = require("../config/dbConfig");
+const sequelizeConfig = require('../config/dbConfig')
 
-const Weather = sequelizeConfig.define("weather", {
+const Weather = sequelizeConfig.define('weather', {
   id: {
     type: Sequelize.INTEGER,
     primaryKey: true,
@@ -23,6 +23,6 @@ const Weather = sequelizeConfig.define("weather", {
     type: Sequelize.STRING,
     allowNull: false,
   },
-});
+})
 
-module.exports = Weather;
+module.exports = Weather
