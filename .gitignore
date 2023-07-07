@@ -3,3 +3,9 @@
 .env
 
 .vscode
+
+test.js
+
+emqxsl-ca.crt
+
+/src/mqtt/.env
