@@ -12,7 +12,4 @@ router.get('/all', weatherAuthorization, weatherController.getAllData)
 // get data within range
 router.get('/ranged', weatherController.getRangedData)
 
-// add weather data
-router.post('/add', weatherController.addData)
-
 module.exports = router

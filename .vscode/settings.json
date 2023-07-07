@@ -1,3 +1,7 @@
 {
-  "cSpell.words": ["middlewares"]
+  "cSpell.words": ["middlewares", "MQTT", "userdata"],
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.autopep8"
+  },
+  "python.formatting.provider": "none"
 }

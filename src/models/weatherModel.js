@@ -3,24 +3,22 @@ const { Sequelize } = require('sequelize')
 const sequelizeConfig = require('../config/dbConfig')
 
 const Weather = sequelizeConfig.define('weather', {
-  id: {
-    type: Sequelize.INTEGER,
-    primaryKey: true,
-    autoIncrement: true,
-  },
-
-  cityName: {
+  channel: {
     type: Sequelize.STRING,
+    allowNull: false,
+  },
+  temperature: {
+    type: Sequelize.FLOAT,
     allowNull: false,
   },
 
   humidity: {
-    type: Sequelize.STRING,
+    type: Sequelize.FLOAT,
     allowNull: false,
   },
 
-  temperature: {
-    type: Sequelize.STRING,
+  pressure: {
+    type: Sequelize.FLOAT,
     allowNull: false,
   },
 })
